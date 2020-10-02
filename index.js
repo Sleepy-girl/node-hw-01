@@ -26,7 +26,7 @@ async function invokeAction({ action, id, name, email, phone }) {
       break;
 
     case "remove":
-      console.table(await Contacts.removeContact(9));
+      console.table(await Contacts.removeContact(id));
       break;
 
     default:

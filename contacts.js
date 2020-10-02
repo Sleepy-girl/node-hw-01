@@ -27,17 +27,18 @@ class Contacts {
     const contactsData = await this.listContacts();
     const result = contactsData.filter((contact) => contact.id !== contactId);
     fs.writeFile(this.contactsPath, JSON.stringify(result));
+    return this.listContacts();
   };
 
   addContact = async (name, email, phone) => {
     const contactsData = await this.listContacts();
     const newContact = {
-      id: contactsPath.length ? [...contactsData].pop().id + 1 : 1,
+      id: contactsData.length ? [...contactsData].pop().id + 10 : 1,
       name,
       email,
       phone,
     };
-    contactsPath.push(contact);
+    contactsData.push(newContact);
     const contactsDataAsJSON = JSON.stringify(contactsData);
     fs.writeFile(this.contactsPath, contactsDataAsJSON);
     return newContact;
