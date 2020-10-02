@@ -1,0 +1,24 @@
+{
+  "name": "node-hw-01",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./index.js",
+    "dev": "nodemon ./index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sleepy-girl/node-hw-01.git"
+  },
+  "author": "Anna Vygovska",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sleepy-girl/node-hw-01/issues"
+  },
+  "homepage": "https://github.com/Sleepy-girl/node-hw-01#readme",
+  "dependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
