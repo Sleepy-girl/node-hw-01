@@ -19,7 +19,9 @@
   },
   "homepage": "https://github.com/Sleepy-girl/node-hw-01#readme",
   "dependencies": {
-    "nodemon": "^2.0.4",
     "yargs": "^16.0.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
   }
 }
