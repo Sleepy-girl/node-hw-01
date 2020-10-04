@@ -1,3 +1,4 @@
+const { v4: uuidv4 } = require("uuid");
 const fs = require("fs").promises;
 const path = require("path");
 // console.log(fs);
@@ -12,9 +13,16 @@ class Contacts {
   }
 
   listContacts = async () => {
-    const contactsData = await fs.readFile(this.contactsPath, {
-      encoding: "utf-8",
-    });
+    const contactsData = await fs.readFile(
+      this.contactsPath,
+      {
+        encoding: "utf-8",
+      },
+      (err, data) => {
+        if (err) throw err;
+        return data;
+      }
+    );
     return JSON.parse(contactsData);
   };
 
@@ -26,50 +34,27 @@ class Contacts {
   removeContact = async (contactId) => {
     const contactsData = await this.listContacts();
     const result = contactsData.filter((contact) => contact.id !== contactId);
-    fs.writeFile(this.contactsPath, JSON.stringify(result));
+    fs.writeFile(this.contactsPath, JSON.stringify(result), (err) => {
+      if (err) throw err;
+    });
     return this.listContacts();
   };
 
   addContact = async (name, email, phone) => {
     const contactsData = await this.listContacts();
     const newContact = {
-      id: contactsData.length ? [...contactsData].pop().id + 10 : 1,
+      id: contactsData.length && uuidv4(),
       name,
       email,
       phone,
     };
     contactsData.push(newContact);
     const contactsDataAsJSON = JSON.stringify(contactsData);
-    fs.writeFile(this.contactsPath, contactsDataAsJSON);
-    return newContact;
+    fs.writeFile(this.contactsPath, contactsDataAsJSON, (err) => {
+      if (err) throw err;
+    });
+    return this.listContacts();
   };
 }
 
 module.exports = new Contacts();
-
-//----------------------------------------------
-// const contactsPath = path.resolve(__dirname, "data", "contacts.json");
-// console.table(listContacts());
-
-// function getContactById(contactId) {
-//   return contactsPath.find((contact) => contact.id === contactId);
-// }
-// console.log(getContactById(9));
-
-// function removeContact(contactId) {
-//   return contactsPath.filter((contact) => contact.id !== contactId);
-// }
-// console.log(removeContact(10));
-
-// function addContact(name, email, phone) {
-//   const contact = {
-//     id: contactsPath.length ? [...contactsPath].pop().id + 1 : 1,
-//     name,
-//     email,
-//     phone,
-//   };
-//   return contactsPath.push(contact);
-// }
-// console.log(addContact("Anna", "pillow@gmail.com", "(050)545-0652"));
-
-// module.exports = { listContacts };
