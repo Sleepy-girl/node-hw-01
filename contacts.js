@@ -9,7 +9,7 @@ const path = require("path");
 
 class Contacts {
   constructor() {
-    this.contactsPath = path.resolve(__dirname, "db", "contacts.json");
+    this.contactsPath = path.resolve(__dirname, "db", "contacts1.json");
   }
 
   listContacts = async () => {
@@ -19,7 +19,10 @@ class Contacts {
         encoding: "utf-8",
       },
       (err, data) => {
-        if (err) throw err;
+        if (err) {
+          throw err;
+          return;
+        }
         return data;
       }
     );
@@ -35,7 +38,10 @@ class Contacts {
     const contactsData = await this.listContacts();
     const result = contactsData.filter((contact) => contact.id !== contactId);
     fs.writeFile(this.contactsPath, JSON.stringify(result), (err) => {
-      if (err) throw err;
+      if (err) {
+        throw err;
+        return;
+      }
     });
     return this.listContacts();
   };
@@ -51,7 +57,10 @@ class Contacts {
     contactsData.push(newContact);
     const contactsDataAsJSON = JSON.stringify(contactsData);
     fs.writeFile(this.contactsPath, contactsDataAsJSON, (err) => {
-      if (err) throw err;
+      if (err) {
+        throw err;
+        return;
+      }
     });
     return this.listContacts();
   };
