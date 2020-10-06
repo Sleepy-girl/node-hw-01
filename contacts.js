@@ -57,7 +57,7 @@ class Contacts {
       };
       contactsData.push(newContact);
       const contactsDataAsJSON = JSON.stringify(contactsData);
-      fs.writeFile(this.contactsPath, contactsDataAsJSON);
+      await fs.writeFile(this.contactsPath, contactsDataAsJSON);
       return this.listContacts();
     } catch (error) {
       console.log(error);
