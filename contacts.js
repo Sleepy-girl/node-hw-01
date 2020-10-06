@@ -20,6 +20,7 @@ class Contacts {
       return JSON.parse(contactsData);
     } catch (error) {
       console.log(error);
+      process.exit(1);
     }
   };
 
@@ -29,6 +30,7 @@ class Contacts {
       return contactsData.find((contact) => contact.id === contactId);
     } catch (error) {
       console.log(error);
+      process.exit(1);
     }
   };
 
@@ -36,10 +38,11 @@ class Contacts {
     try {
       const contactsData = await this.listContacts();
       const result = contactsData.filter((contact) => contact.id !== contactId);
-      fs.writeFile(this.contactsPath, JSON.stringify(result));
+      await fs.writeFile(this.contactsPath, JSON.stringify(result));
       return this.listContacts();
     } catch (error) {
       console.log(error);
+      process.exit(1);
     }
   };
 
@@ -58,6 +61,7 @@ class Contacts {
       return this.listContacts();
     } catch (error) {
       console.log(error);
+      process.exit(1);
     }
   };
 }
