@@ -38,4 +38,4 @@ invokeAction(argv);
 // node index.js --action="add" --name="Mango" --email="mango@gmail.com" --phone="322-22-22"
 
 // # Удаляем контакт
-// node index.js --action="remove" --id=3
+// node index.js --action="remove" --id='6458315a-5305-4428-8f00-dc03324f73df'
